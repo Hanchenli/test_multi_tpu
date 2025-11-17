@@ -1,24 +1,14 @@
-# count_tpu_chips.py
+from torch_xla import launch as xla_launch
+from torch_xla.runtime import world_size as xla_world_size
 
-import torch_xla
-import torch_xla.core.xla_model as xm
 
 def main():
-    # Total number of TPU chips across all workers
-    world_size = xm.xrt_world_size()
+    print("Hanchen was here!")
+    print(xla_world_size())
 
-    # Chips available on this worker (local)
-    local_world_size = xm.get_local_world_size()
 
-    # Local device list (xla:0, xla:1, ...)
-    devices = xm.get_xla_supported_devices()
-
-    print("=== TPU Chip Information ===")
-    print(f"Global world size (total chips): {world_size}")
-    print(f"Local world size  (chips on this worker): {local_world_size}")
-    print(f"Local devices: {devices}")
-    print(f"My global ordinal: {xm.get_ordinal()}")
-    print(f"My local ordinal:  {xm.get_local_ordinal()}")
-
-if __name__ == "__main__":
+def xla_main(*args):
     main()
+
+
+xla_launch(xla_main)
