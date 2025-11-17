@@ -6,4 +6,4 @@ def xla_main(*args):
     print("Global world size:", xla_world_size())
 
 if __name__ == "__main__":
-    xla_launch(xla_main, nprocs=1)
+    xla_launch(xla_main)
